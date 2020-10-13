@@ -3,7 +3,7 @@ import { defineConfig } from 'umi'
 export default defineConfig({
   proxy: {
     '/api/': {
-      target: 'http://10.112.2.12:91',
+      target: 'http://localhost',
       changeOrigin: true
     }
   },
