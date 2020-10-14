@@ -7,7 +7,7 @@ const { join, extname } = require('path')
 const isDev = process.env.NODE_ENV === 'development'
 
 const root = join(__dirname, 'dist')
-
+console.log(__dirname)
 const app = new Koa()
 app.use(
   compress({

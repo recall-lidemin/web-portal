@@ -6,7 +6,7 @@ const BASE_PATH = {
   dev: '/',
   staging: '/web-portal/',
   testing: '/dist/',
-  production: '/web-portal/'
+  production: '/'
 }[REACT_APP_ENV]
 
 export default defineConfig({
