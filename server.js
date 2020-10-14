@@ -6,7 +6,7 @@ const { join, extname } = require('path')
 
 const isDev = process.env.NODE_ENV === 'development'
 
-const root = join(__dirname, 'web-portal')
+const root = join(__dirname, 'dist')
 
 const app = new Koa()
 app.use(
@@ -40,7 +40,7 @@ app.use(async (ctx, next) => {
   // 符合要求的路由才进行服务端渲染，否则走静态文件逻辑
   if (!ext) {
     if (!render) {
-      render = require('./web-portal/umi.server')
+      render = require('./dist/umi.server')
     }
     // 这里默认是字符串渲染
     ctx.type = 'text/html'
@@ -59,7 +59,7 @@ app.use(async (ctx, next) => {
      *  缓存
      */
     if (isDev) {
-      delete require.cache[require.resolve('./web-portal/umi.server')]
+      delete require.cache[require.resolve('./dist/umi.server')]
     }
     ctx.body = html
   } else {
@@ -72,7 +72,7 @@ app.use(async (ctx, next) => {
  *  这里最好是用nginx配置静态目录，如果是用cdn方式部署，这里可以忽略
  *
  */
-app.use(mount('/web-portal', require('koa-static')(root)))
+app.use(mount('/dist', require('koa-static')(root)))
 
 app.listen(7001)
 console.log('http://localhost:7001')

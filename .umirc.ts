@@ -1,9 +1,13 @@
 import { defineConfig } from 'umi'
 
-const outputPath = 'web-portal/'
+const REACT_APP_ENV = process.env.REACT_APP_ENV
 
-const env = process.env.NODE_ENV
-const path = env === 'development' ? 'http://127.0.0.1:8000/' : outputPath
+const BASE_PATH = {
+  dev: '/',
+  staging: '/web-portal/',
+  testing: '/web-portal/',
+  production: '/web-portal/'
+}[REACT_APP_ENV]
 
 export default defineConfig({
   proxy: {
@@ -13,61 +17,55 @@ export default defineConfig({
     }
   },
   ssr: {
-    devServerRender: false
+    mode: 'stream'
   },
   antd: {},
-  favicon: `/web-portal/favicon.ico`,
   nodeModulesTransform: {
     type: 'none'
   },
-  outputPath: 'web-portal',
-  publicPath: path,
+  publicPath: BASE_PATH,
+  base: BASE_PATH,
+  favicon: `${BASE_PATH}favicon.png`,
   locale: false,
   extraPostCSSPlugins: [],
   theme: {
     'primary-color': '#b71b12'
+  },
+  dynamicImport: {
+    loading: '@/components/PageLoading/index'
+  },
+  chunks: process.env.REACT_APP_ENV !== 'dev' ? ['vendors', 'umi'] : ['umi'],
+  chainWebpack: function(config, { webpack }) {
+    // 当前环境为 发布阶段
+    config.when(process.env.REACT_APP_ENV !== 'dev', (config) => {
+      console.log('当前环境非开发环境')
+      config.merge({
+        optimization: {
+          minimize: true,
+          splitChunks: {
+            chunks: 'async',
+            minSize: 30000,
+            minChunks: 3,
+            automaticNameDelimiter: '.',
+            cacheGroups: {
+              vendor: {
+                name: 'vendors',
+                test({ resource }: any) {
+                  return /[\\/]node_modules[\\/]/.test(resource)
+                },
+                priority: 10
+              }
+            }
+          }
+        }
+      })
+    })
+    // 当前环境为 开发阶段
+    config.when(process.env.REACT_APP_ENV === 'dev', (config) => {
+      console.log('当前环境为 开发环境')
+    })
+  },
+  manifest: {
+    basePath: '/'
   }
-  // analyze: {
-  //   analyzerMode: 'server',
-  //   analyzerPort: 8888,
-  //   openAnalyzer: true,
-  //   generateStatsFile: false,
-  //   statsFilename: 'stats.json',
-  //   logLevel: 'info',
-  //   defaultSizes: 'parsed'
-  // },
-  // chunks: ['antdesigns', 'antv', 'umi'],
-  // chainWebpack: function (config, { webpack }) {
-  //   config.plugin("replace").use(require("webpack").ContextReplacementPlugin).tap(() => {
-  //     return [/moment[/\\]locale$/, /zh-cn/];
-  //   });
-  //   config.merge({
-  //     optimization: {
-  //       minimize: true,
-  //       splitChunks: {
-  //         chunks: 'all',
-  //         automaticNameDelimiter: '.',
-  //         minSize: 30000,
-  //         maxSize: 0,
-  //         minChunks: 1,
-  //         maxAsyncRequests: 10,
-  //         maxInitialRequests: 5,
-  //         cacheGroups: {
-  //           antdesigns: {
-  //             name: 'antdesigns',
-  //             chunks: 'all',
-  //             test: /(@antd|antd|@ant-design)/,
-  //             priority: 10,
-  //           },
-  //           antv: {
-  //             name: 'antv',
-  //             chunks: 'all',
-  //             test: /(@antv|antv)/,
-  //             priority: 10,
-  //           },
-  //         },
-  //       }
-  //     }
-  //   })
-  // },
 })

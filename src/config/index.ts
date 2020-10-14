@@ -10,7 +10,7 @@
 // 各系统 url
 // interface UrlMap {
 //   urlDangjian: string // 主系统
-//   // urlPortal: string // 门户网站
+//   urlPortal: string // 门户网站
 //   urlCommon: string // 通用地址
 // }
 // const urlMap: UrlMap = {
