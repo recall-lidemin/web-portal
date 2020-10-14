@@ -24,12 +24,16 @@
   "dependencies": {
     "@ant-design/pro-layout": "^5.0.12",
     "@ant-design/pro-table": "^2.7.1",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.2.16",
     "axios": "^0.19.2",
+    "eslint-plugin-react-hooks": "^4.1.2",
     "prettier": "^1.19.1",
     "react": "^16.13.1",
     "react-dom": "^16.12.0",
+    "typescript": "^4.0.3",
     "umi": "^3.2.16",
     "yorkie": "^2.0.0"
   },

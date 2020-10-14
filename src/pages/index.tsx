@@ -1,9 +1,6 @@
 import React from 'react'
+import Home from './home'
 
 export default () => {
-  return (
-    <div>
-      <h1>Page index</h1>
-    </div>
-  )
+  return <Home />
 }

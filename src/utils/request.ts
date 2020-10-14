@@ -61,7 +61,7 @@ service.interceptors.response.use(
       // token失效
       if (code === ERR_TOKEN) {
         removeLocalToken()
-        window.location.href = combineURL(__webpack_public_path__, '/user/login')
+        window.location.href = combineURL(__webpack_public_path__, '/login')
       }
       if (!code && code !== ERR_OK) {
         return response.data
