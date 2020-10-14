@@ -9,7 +9,7 @@
 
 # production
 /dist
-
+/web-portal
 # misc
 .DS_Store
 
