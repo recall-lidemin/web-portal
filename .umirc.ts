@@ -5,7 +5,7 @@ const REACT_APP_ENV = process.env.REACT_APP_ENV
 const BASE_PATH = {
   dev: '/',
   staging: '/web-portal/',
-  testing: '/web-portal/',
+  testing: '/dist/',
   production: '/web-portal/'
 }[REACT_APP_ENV]
 
@@ -25,7 +25,7 @@ export default defineConfig({
   },
   publicPath: BASE_PATH,
   base: BASE_PATH,
-  favicon: `${BASE_PATH}favicon.png`,
+  favicon: `${BASE_PATH}favicon.ico`,
   locale: false,
   extraPostCSSPlugins: [],
   theme: {
@@ -34,7 +34,7 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/components/PageLoading/index'
   },
-  chunks: process.env.REACT_APP_ENV !== 'dev' ? ['vendors', 'umi'] : ['umi'],
+  chunks: process.env.REACT_APP_ENV !== 'dev' ? ['umi'] : ['umi'],
   chainWebpack: function(config, { webpack }) {
     // 当前环境为 发布阶段
     config.when(process.env.REACT_APP_ENV !== 'dev', (config) => {
@@ -46,16 +46,7 @@ export default defineConfig({
             chunks: 'async',
             minSize: 30000,
             minChunks: 3,
-            automaticNameDelimiter: '.',
-            cacheGroups: {
-              vendor: {
-                name: 'vendors',
-                test({ resource }: any) {
-                  return /[\\/]node_modules[\\/]/.test(resource)
-                },
-                priority: 10
-              }
-            }
+            automaticNameDelimiter: '.'
           }
         }
       })
