@@ -1,5 +1,10 @@
 import { defineConfig } from 'umi'
 
+const outputPath = 'web-portal/'
+
+const env = process.env.NODE_ENV
+const path = env === 'development' ? 'http://127.0.0.1:8000/' : outputPath
+
 export default defineConfig({
   proxy: {
     '/api/': {
@@ -7,18 +12,17 @@ export default defineConfig({
       changeOrigin: true
     }
   },
-  history: { type: 'hash' },
+  ssr: {
+    devServerRender: false
+  },
+  antd: {},
   favicon: `/web-portal/favicon.ico`,
   nodeModulesTransform: {
     type: 'none'
   },
-  publicPath: '/web-portal/',
-  locale: {
-    default: 'zh-CN',
-    // default true, when it is true, will use `navigator.language` overwrite default
-    antd: true
-    // baseNavigator: true
-  },
+  outputPath: 'web-portal',
+  publicPath: path,
+  locale: false,
   extraPostCSSPlugins: [],
   theme: {
     'primary-color': '#b71b12'
