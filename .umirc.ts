@@ -24,7 +24,7 @@ export default defineConfig({
     immer: true
   },
   ssr: {
-    // mode: 'stream',
+    mode: 'stream',
     devServerRender: false
   },
   publicPath: BASE_PATH,
