@@ -1,5 +1,4 @@
 import React, { FC } from 'react'
-import { connect } from 'umi'
 import Header from '@/components/GlobalHeader'
 import Nav from '@/components/Nav'
 import Banner from '@/components/Banner'
@@ -17,4 +16,4 @@ const Home: FC<IProps> = (props) => {
   )
 }
 
-export default connect()(Home)
+export default Home

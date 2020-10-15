@@ -52,11 +52,11 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.11.1",
     "husky": "^0.14.3",
-    "lint-staged": "^10.0.7",
     "koa": "^2.13.0",
     "koa-compress": "^5.0.1",
     "koa-mount": "^4.0.0",
     "koa-static": "^5.0.0",
+    "lint-staged": "^10.0.7",
     "nodemon": "^2.0.5"
   }
 }

@@ -23,7 +23,6 @@ app.use(
 
 // Express
 app.use(async (req, res) => {
-  console.log()
   if (req && req.url === '/dist/umi.css') {
     res.setHeader('Content-Type', 'text/css')
     res.send(umicss)

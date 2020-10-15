@@ -3,10 +3,10 @@ import { defineConfig } from 'umi'
 const REACT_APP_ENV = process.env.REACT_APP_ENV
 
 const BASE_PATH = {
-  dev: '/',
-  staging: '/web-portal/',
+  dev: '/dist/',
+  staging: '/dist/',
   testing: '/dist/',
-  production: '/'
+  production: '/web-portal/'
 }[REACT_APP_ENV]
 
 export default defineConfig({
@@ -24,7 +24,8 @@ export default defineConfig({
     immer: true
   },
   ssr: {
-    mode: 'stream'
+    // mode: 'stream',
+    devServerRender: false
   },
   publicPath: BASE_PATH,
   base: BASE_PATH,
@@ -35,23 +36,23 @@ export default defineConfig({
   },
   dynamicImport: {
     loading: '@/components/PageLoading/index'
-  },
-  chunks: process.env.REACT_APP_ENV !== 'dev' ? ['umi'] : ['umi'],
-  chainWebpack: function(config, { webpack }) {
-    // 当前环境为 发布阶段
-    config.when(process.env.REACT_APP_ENV !== 'dev', (config) => {
-      console.log('当前环境非开发环境')
-      config.merge({
-        optimization: {
-          minimize: true,
-          splitChunks: {
-            chunks: 'async',
-            minSize: 30000,
-            minChunks: 3,
-            automaticNameDelimiter: '.'
-          }
-        }
-      })
-    })
   }
+  // chunks: process.env.REACT_APP_ENV !== 'dev' ? ['umi'] : ['umi'],
+  // chainWebpack: function(config, { webpack }) {
+  //   // 当前环境为 发布阶段
+  //   config.when(process.env.REACT_APP_ENV !== 'dev', (config) => {
+  //     console.log('当前环境非开发环境')
+  //     config.merge({
+  //       optimization: {
+  //         minimize: true,
+  //         splitChunks: {
+  //           chunks: 'async',
+  //           minSize: 30000,
+  //           minChunks: 3,
+  //           automaticNameDelimiter: '.'
+  //         }
+  //       }
+  //     })
+  //   })
+  // }
 })
