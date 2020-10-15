@@ -13,11 +13,7 @@
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
     },
-    "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": true,
-    "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["mock/**/*", "src/**/*", "config/**/*", ".umirc.ts", "typings.d.ts"],
-  "exclude": ["node_modules", "build", "dist", "scripts", "src/pages/.umi/*", "webpack", "jest"]
+  "include": ["mock/**/*", "src/**/*", "config/**/*", ".umirc.ts", "typings.d.ts"]
 }

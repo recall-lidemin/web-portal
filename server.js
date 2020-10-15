@@ -2,12 +2,11 @@ const Koa = require('koa')
 const compress = require('koa-compress')
 const mount = require('koa-mount')
 const { join, extname } = require('path')
-// const { parseCookie, parseNavLang } = require('./serverHelper');
+const { parseCookie } = require('./serverHelper')
 
 const isDev = process.env.NODE_ENV === 'development'
 
 const root = join(__dirname, 'dist')
-console.log(__dirname)
 const app = new Koa()
 app.use(
   compress({
@@ -33,7 +32,7 @@ app.use(async (ctx, next) => {
    *
    *  同时获取浏览器的默认语言，处理好
    */
-  // global._cookies = parseCookie(ctx);
+  global._cookies = parseCookie(ctx)
   // global._navigatorLang = parseNavLang(ctx);
 
   const ext = extname(ctx.request.path)

@@ -10,24 +10,26 @@ const BASE_PATH = {
 }[REACT_APP_ENV]
 
 export default defineConfig({
+  nodeModulesTransform: {
+    type: 'none'
+  },
   proxy: {
     '/api/': {
       target: 'http://localhost',
       changeOrigin: true
     }
   },
+  antd: {},
+  dva: {
+    immer: true
+  },
   ssr: {
     mode: 'stream'
-  },
-  antd: {},
-  nodeModulesTransform: {
-    type: 'none'
   },
   publicPath: BASE_PATH,
   base: BASE_PATH,
   favicon: `${BASE_PATH}favicon.ico`,
   locale: false,
-  extraPostCSSPlugins: [],
   theme: {
     'primary-color': '#b71b12'
   },
@@ -51,12 +53,5 @@ export default defineConfig({
         }
       })
     })
-    // 当前环境为 开发阶段
-    config.when(process.env.REACT_APP_ENV === 'dev', (config) => {
-      console.log('当前环境为 开发环境')
-    })
-  },
-  manifest: {
-    basePath: '/'
   }
 })

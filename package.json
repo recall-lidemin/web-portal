@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "cross-env REACT_APP_ENV=dev umi dev --port 9001",
+    "start": "cross-env REACT_APP_ENV=dev concurrently \"umi dev\" \"nodemon server.js\"",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none umi dev --port 9000",
     "build:stage": "cross-env REACT_APP_ENV=staging umi build",
     "build:test": "cross-env REACT_APP_ENV=testing umi build",
@@ -29,14 +29,8 @@
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.2.16",
     "axios": "^0.19.2",
-    "compression": "^1.7.4",
     "eslint-plugin-react-hooks": "^4.1.2",
     "express": "^4.17.1",
-    "helmet": "^4.1.1",
-    "koa": "^2.13.0",
-    "koa-compress": "^5.0.1",
-    "koa-mount": "^4.0.0",
-    "koa-static": "^5.0.0",
     "prettier": "^1.19.1",
     "react": "^16.13.1",
     "react-dom": "^16.12.0",
@@ -49,6 +43,7 @@
   "devDependencies": {
     "@types/classnames": "^2.2.10",
     "babel-eslint": "^9.0.0",
+    "concurrently": "^5.3.0",
     "cross-env": "^7.0.2",
     "eslint": "^5.4.0",
     "eslint-config-umi": "^1.4.0",
@@ -57,6 +52,11 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.11.1",
     "husky": "^0.14.3",
-    "lint-staged": "^10.0.7"
+    "lint-staged": "^10.0.7",
+    "koa": "^2.13.0",
+    "koa-compress": "^5.0.1",
+    "koa-mount": "^4.0.0",
+    "koa-static": "^5.0.0",
+    "nodemon": "^2.0.5"
   }
 }

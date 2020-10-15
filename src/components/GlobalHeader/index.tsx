@@ -7,7 +7,7 @@ const Header: FC<IProps> = () => {
   return (
     <div className={`${styles['header']}`}>
       <div className="login">
-        欢迎登录淄矿集团智慧党建平台！|{' '}
+        欢迎登录淄矿集团智慧党建平台！|
         <Link
           to={{
             pathname: '/login'
